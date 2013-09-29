@@ -17,3 +17,11 @@ ln -s $DIR/bash_aliases ~/.bash_aliases
 echo 'Linking .profile'
 mv ~/.profile ~/.profile.bak
 ln -s $DIR/profile ~/.profile
+
+echo 'Installing git helpers'
+mv ~/.git-prompt.sh ~/.git-prompt.sh.bak
+wget -O ~/.git-prompt.sh https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
+chmod +x ~/.git-prompt.sh
+mv ~/.git-completion.sh ~/.git-completion.sh.bak
+wget -O ~/.git-completion.sh https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+chmod +x ~/.git-completion.sh

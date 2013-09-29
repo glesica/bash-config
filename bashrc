@@ -86,7 +86,7 @@ mkdir -p $WORKON_HOME
 export VIMHOME=/home/${USER}/.vim
 
 # Git completion
-source ~/.git_completion.sh
+source ~/.git-completion.sh
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_REPO='$(__git_ps1 " (%s)")'
