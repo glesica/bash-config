@@ -70,6 +70,16 @@ LIGHTCYAN='\[\e[1;36m\]'
 WHITE='\[\e[1;37m\]'
 NOCOLOR='\[\e[1;00m\]'
 
+# Git completion
+source ~/.git-completion.sh
+source ~/.git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_REPO='$(__git_ps1 " (%s)")'
+
+# Setup virtualenvwrapper for Python virtual environments
+export WORKON_HOME=~/.envs
+mkdir -p $WORKON_HOME
+
 # set up a nice prompt
 PS_SUCCESS=$GREEN
 PS_FAILURE=$RED
@@ -78,18 +88,8 @@ PS_GIT=$LIGHTPURPLE
 PS_DEFAULT=$CYAN
 PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)\342\226\210\342\226\210 ${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
 
-# Setup virtualenvwrapper for Python virtual environments
-export WORKON_HOME=~/.envs
-mkdir -p $WORKON_HOME
-
 # Create VIMHOME
 export VIMHOME=/home/${USER}/.vim
-
-# Git completion
-source ~/.git-completion.sh
-source ~/.git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_REPO='$(__git_ps1 " (%s)")'
 
 # A small function to aid in lowercasing file extensions, 
 # such as those produced by digital cameras (.JPG)
