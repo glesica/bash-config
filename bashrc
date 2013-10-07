@@ -48,6 +48,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# set up keyboard for use by a non-degenerate
+keyboard
+
 # add local bins to path
 PATH="$PATH:/home/${USER}/bin:/home/${USER}/local/bin"
 
