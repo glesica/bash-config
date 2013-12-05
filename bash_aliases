@@ -42,3 +42,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Add a quick alias to remap the caps lock to ctrl since this gets weirded up
 # when a new keyboard gets plugged in
 alias keyboard='setxkbmap -option "ctrl:nocaps"'
+
+# Some handy git aliases
+alias gitco='git checkout'
+alias gitbco='git checkout -b'
+alias gitst='git status'
