@@ -91,6 +91,9 @@ PS_GIT=$LIGHTPURPLE
 PS_DEFAULT=$CYAN
 PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)\342\226\210\342\226\210 ${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
 
+# Java *sigh*
+export JAVA_HOME=~/Programs/jre1.7.0_45
+
 # Create VIMHOME
 export VIMHOME=/home/${USER}/.vim
 
