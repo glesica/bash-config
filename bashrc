@@ -163,10 +163,14 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # Exports for ESys-Particle
 # See: https://answers.launchpad.net/esys-particle/+faq/1613
-export PATH=/home/george/local/bin/:/usr/local/bin/:$PATH
-export LD_LIBRARY_PATH=/home/george/local/lib/:/usr/local/lib/:$LD_LIBRARY_PATH
-export LIBRARY_PATH=/home/george/local/lib/:/usr/local/lib/:$LIBRARY_PATH
-export PYTHONPATH=/home/george/local/lib/python2.7/site-packages/:$PYTHONPATH
+export PATH=/home/${USER}/local/bin/:/usr/local/bin/:$PATH
+export LD_LIBRARY_PATH=/home/${USER}/local/lib/:/usr/local/lib/:$LD_LIBRARY_PATH
+export LIBRARY_PATH=/home/${USER}/local/lib/:/usr/local/lib/:$LIBRARY_PATH
+export PYTHONPATH=/home/${USER}/local/lib/python2.7/site-packages/:$PYTHONPATH
 
 # Use 256 color terminal
 export TERM=xterm-256color
+
+# Golang
+export GOPATH=/home/${USER}/Go
+export PATH=$PATH:$GOPATH/bin
