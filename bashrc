@@ -172,5 +172,6 @@ export PYTHONPATH=/home/${USER}/local/lib/python2.7/site-packages/:$PYTHONPATH
 export TERM=xterm-256color
 
 # Golang
+export GOROOT=/home/${USER}/local/go
 export GOPATH=/home/${USER}/Go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
