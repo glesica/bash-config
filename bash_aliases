@@ -47,3 +47,6 @@ alias keyboard='setxkbmap -option "ctrl:nocaps"'
 alias gitco='git checkout'
 alias gitbco='git checkout -b'
 alias gitst='git status'
+
+# File helpers
+alias mvbooks='for filename in $(ls ~/Downloads/*.epub); do mv "$filename" ~/Books/; mv "${filename%.*}.pdf" ~/Books/; done'
