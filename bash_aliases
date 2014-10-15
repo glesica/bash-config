@@ -47,3 +47,9 @@ alias keyboard='setxkbmap -option "ctrl:nocaps"'
 alias gitco='git checkout'
 alias gitbco='git checkout -b'
 alias gitst='git status'
+
+# Move to neovim
+alias vim=nvim
+
+# Fancy Git stuff
+alias glf='git log --oneline --graph --decorate --all'
