@@ -51,9 +51,6 @@ fi
 # set up keyboard for use by a non-degenerate
 keyboard
 
-# add local bins to path
-PATH="$PATH:/home/${USER}/bin:/home/${USER}/local/bin"
-
 # colors (lazy shortcut)
 BLACK='\[\e[0;30m\]'
 RED='\[\e[0;31m\]'
@@ -92,7 +89,8 @@ PS_DEFAULT=$CYAN
 PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)\342\226\210\342\226\210 ${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
 
 # Java *sigh*
-export JAVA_HOME=~/Programs/jre1.7.0_45
+#export JAVA_HOME=~/Programs/jre1.7
+#export STUDIO_JDK=~/Programs/jdk1.7
 
 # Create VIMHOME
 export VIMHOME=/home/${USER}/.vim
@@ -170,3 +168,16 @@ export PYTHONPATH=/home/george/local/lib/python2.7/site-packages/:$PYTHONPATH
 
 # Use 256 color terminal
 export TERM=xterm-256color
+
+# add local bins to path
+PATH="/home/${USER}/bin:/home/${USER}/local/bin:$PATH"
+
+# Set the vim runtime for Neovim
+export VIMRUNTIME=/usr/share/vim/vim74
+
+# Set the editor
+export EDITOR=vim
+
+# Go tools
+export GOPATH=/home/george/go
+export PATH=$PATH:$GOPATH/bin
