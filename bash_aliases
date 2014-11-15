@@ -1,4 +1,5 @@
-# .bash_aliases
+# ~/.bash_aliases
+#
 # George Lesica
 # Convenience aliases.
 

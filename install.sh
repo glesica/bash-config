@@ -14,9 +14,9 @@ echo 'Linking .bash_aliases'
 mv ~/.bash_aliases ~/.bash_aliases.bak
 ln -s $DIR/bash_aliases ~/.bash_aliases
 
-echo 'Linking .profile'
-mv ~/.profile ~/.profile.bak
-ln -s $DIR/profile ~/.profile
+echo 'Linking .bash_profile'
+mv ~/.bash_profile ~/.bash_profile.bak
+ln -s $DIR/bash_profile ~/.bash_profile
 
 echo 'Installing git helpers'
 mv ~/.git-prompt.sh ~/.git-prompt.sh.bak

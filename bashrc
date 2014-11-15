@@ -1,4 +1,5 @@
-# .bashrc
+# ~/.bashrc
+#
 # George Lesica <george@lesica.com>
 # My .bashrc file. Project or software-related settings are generally toward
 # the end of the file. This file is largely based on the default Debian/Ubuntu
@@ -7,14 +8,14 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
+# Don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace.
 HISTCONTROL=ignoredups:ignorespace
 
-# append to the history file, don't overwrite it
+# Append to the history file, don't overwrite it.
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1).
 HISTSIZE=100000
 HISTFILESIZE=200000
 
@@ -22,36 +23,34 @@ HISTFILESIZE=200000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# make less more friendly for non-text input files, see lesspipe(1)
+# Make less more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
+# Use 256 color terminal.
+export TERM=xterm-256color
 
-# set a fancy prompt (non-color, unless we know we "want" color)
+# Set a fancy prompt (non-color, unless we know we "want" color).
 case "$TERM" in
     xterm-color) color_prompt=yes;;
     xterm-256color) color_prompt=yes;;
 esac
 
-# read in alias definitions.
+# Read in alias definitions.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
+# Enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# set up keyboard for use by a non-degenerate
+# Set up keyboard for use by a non-degenerate.
 keyboard
 
-# colors (lazy shortcut)
+# Colors (lazy shortcut).
 BLACK='\[\e[0;30m\]'
 RED='\[\e[0;31m\]'
 GREEN='\[\e[0;32m\]'
@@ -70,17 +69,17 @@ LIGHTCYAN='\[\e[1;36m\]'
 WHITE='\[\e[1;37m\]'
 NOCOLOR='\[\e[1;00m\]'
 
-# Git completion
+# Git completion.
 source ~/.git-completion.sh
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_REPO='$(__git_ps1 " (%s)")'
 
-# Setup virtualenvwrapper for Python virtual environments
+# Setup virtualenvwrapper for Python virtual environments.
 export WORKON_HOME=~/.envs
 mkdir -p $WORKON_HOME
 
-# set up a nice prompt
+# Set up a nice prompt.
 PS_SUCCESS=$GREEN
 PS_FAILURE=$RED
 PS_HOST=$YELLOW
@@ -88,15 +87,9 @@ PS_GIT=$LIGHTPURPLE
 PS_DEFAULT=$CYAN
 PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)\342\226\210\342\226\210 ${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
 
-# Java *sigh*
-#export JAVA_HOME=~/Programs/jre1.7
-#export STUDIO_JDK=~/Programs/jdk1.7
-
-# Create VIMHOME
-export VIMHOME=/home/${USER}/.vim
-
 # A small function to aid in lowercasing file extensions, 
 # such as those produced by digital cameras (.JPG)
+# ------------------------------------------------
 extlower() {
     for ofn in $@; do
         ofe=`echo "${ofn}" | rev | cut -d'.' -f1 | rev`
@@ -145,6 +138,7 @@ cb() {
     fi
   fi
 }
+
 # Aliases / functions leveraging the cb() function
 # ------------------------------------------------
 # Copy contents of a file
@@ -156,29 +150,12 @@ alias cbwd="pwd | cb"
 # Copy most recent command in bash history
 alias cbhs="cat $HISTFILE | tail -n 1 | cb"
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-# Exports for ESys-Particle
-# See: https://answers.launchpad.net/esys-particle/+faq/1613
-export PATH=/home/${USER}/local/bin/:/usr/local/bin/:$PATH
-export LD_LIBRARY_PATH=/home/${USER}/local/lib/:/usr/local/lib/:$LD_LIBRARY_PATH
-export LIBRARY_PATH=/home/${USER}/local/lib/:/usr/local/lib/:$LIBRARY_PATH
-export PYTHONPATH=/home/${USER}/local/lib/python2.7/site-packages/:$PYTHONPATH
-
-# Use 256 color terminal
-export TERM=xterm-256color
-
-# add local bins to path
-PATH="/home/${USER}/bin:/home/${USER}/local/bin:$PATH"
-
-# Set the vim runtime for Neovim
-export VIMRUNTIME=/usr/share/vim/vim74
+# Add local bins to path.
+export PATH="$HOME/bin:$HOME/local/bin:$PATH"
 
 # Set the editor
 export EDITOR=vim
 
 # Golang
-export GOROOT=/home/${USER}/local/go
-export GOPATH=/home/${USER}/Go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOPATH=$HOME/Workspace/Go
+export PATH="$PATH:$GOPATH/bin"
