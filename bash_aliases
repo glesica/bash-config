@@ -3,6 +3,8 @@
 # George Lesica
 # Convenience aliases.
 
+ARCH=$(uname)
+
 # Long directory listings
 alias lsl="ls -l"
 alias lsla="ls -la"
@@ -42,15 +44,15 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Add a quick alias to remap the caps lock to ctrl since this gets weirded up
 # when a new keyboard gets plugged in
-alias keyboard='setxkbmap -option "ctrl:nocaps"'
+case "$ARCH" in
+    Linux) alias keyboard='setxkbmap -option "ctrl:nocaps"';;
+    Darwin) alias keyboard='';;
+esac
 
 # Some handy git aliases
 alias gitco='git checkout'
 alias gitbco='git checkout -b'
 alias gitst='git status'
-
-# Move to neovim
-alias vim=nvim
 
 # Fancy Git stuff
 alias glf='git log --oneline --graph --decorate --all'
