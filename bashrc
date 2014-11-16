@@ -5,6 +5,8 @@
 # the end of the file. This file is largely based on the default Debian/Ubuntu
 # file and on http://tldp.org/LDP/abs/html/sample-bashrc.html.
 
+ARCH=$(uname)
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -152,6 +154,11 @@ alias cbhs="cat $HISTFILE | tail -n 1 | cb"
 
 # Add local bins to path.
 export PATH="$HOME/bin:$HOME/local/bin:$PATH"
+
+# Add Mac specific binaries to path.
+if [ "$ARCH" = "Darwin" ]; then
+    export PATH="/usr/local/git/bin:$PATH"
+fi
 
 # Set the editor
 export EDITOR=vim
