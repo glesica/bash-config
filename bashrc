@@ -166,3 +166,6 @@ export EDITOR=vim
 # Golang
 export GOPATH=$HOME/Workspace/Go
 export PATH="$PATH:$GOPATH/bin"
+
+# Improve output, especially on Mac.
+export CLICOLOR=1

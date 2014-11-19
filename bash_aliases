@@ -59,3 +59,6 @@ alias glf='git log --oneline --graph --decorate --all'
 
 # File helpers
 alias mvbooks='for filename in $(ls ~/Downloads/*.epub); do mv "$filename" ~/Books/; mv "${filename%.*}.pdf" ~/Books/; done'
+
+# Improve ls output
+alias ls='ls -GFh'
