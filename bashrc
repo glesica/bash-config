@@ -158,6 +158,7 @@ export PATH="$HOME/bin:$HOME/local/bin:$PATH"
 # Add Mac specific binaries to path.
 if [ "$ARCH" = "Darwin" ]; then
     export PATH="/usr/local/git/bin:$PATH"
+    export PATH="$PATH:$HOME/Workspace/elixir/bin"
 fi
 
 # Set the editor
