@@ -159,6 +159,7 @@ export PATH="$HOME/bin:$HOME/local/bin:$PATH"
 if [ "$ARCH" = "Darwin" ]; then
     export PATH="/usr/local/git/bin:$PATH"
     export PATH="$PATH:$HOME/Workspace/elixir/bin"
+    export PATH="$PATH:$HOME/Workspace/gradle/bin"
 fi
 
 # Set the editor
