@@ -80,6 +80,9 @@ GIT_REPO='$(__git_ps1 " (%s)")'
 # Setup virtualenvwrapper for Python virtual environments.
 export WORKON_HOME=~/.envs
 mkdir -p $WORKON_HOME
+if [ "$ARCH" = "Darwin" ]; then
+    source /usr/local/bin/virtualenvwrapper.sh 2> /dev/null || true
+fi
 
 # Set up a nice prompt.
 PS_SUCCESS=$GREEN
@@ -157,9 +160,9 @@ export PATH="$HOME/bin:$HOME/local/bin:$PATH"
 
 # Add Mac specific binaries to path.
 if [ "$ARCH" = "Darwin" ]; then
-    export PATH="/usr/local/git/bin:$PATH"
-    export PATH="$PATH:$HOME/Workspace/elixir/bin"
+    export PATH="/usr/local/bin:$PATH" # Homebrew
     export PATH="$PATH:$HOME/Workspace/gradle/bin"
+    export PATH="$PATH:$HOME/Library/Haskell/bin"
 fi
 
 # Set the editor
@@ -171,3 +174,5 @@ export PATH="$PATH:$GOPATH/bin"
 
 # Improve output, especially on Mac.
 export CLICOLOR=1
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
