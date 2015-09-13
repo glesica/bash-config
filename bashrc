@@ -169,7 +169,11 @@ fi
 export EDITOR=vim
 
 # Golang
-export GOPATH=$HOME/Workspace/Go
+if [ "$ARCH" = "Darwin" ]; then
+    export GOPATH=$HOME/Workspace/Go
+else
+    export GOPATH=$HOME/Go
+fi
 export PATH="$PATH:$GOPATH/bin"
 
 # Improve output, especially on Mac.
