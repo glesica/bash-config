@@ -51,7 +51,7 @@ esac
 
 # Some handy git aliases
 alias gco='git checkout'
-alias gst'git status'
+alias gst='git status'
 alias glf='git log --oneline --graph --decorate --all'
 
 # File helpers
