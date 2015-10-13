@@ -50,11 +50,8 @@ case "$ARCH" in
 esac
 
 # Some handy git aliases
-alias gitco='git checkout'
-alias gitbco='git checkout -b'
-alias gitst='git status'
-
-# Fancy Git stuff
+alias gco='git checkout'
+alias gst'git status'
 alias glf='git log --oneline --graph --decorate --all'
 
 # File helpers
