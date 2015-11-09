@@ -169,12 +169,17 @@ fi
 export EDITOR=vim
 
 # Golang
-if [ "$ARCH" = "Darwin" ]; then
-    export GOPATH=$HOME/Workspace/Go
-else
-    export GOPATH=$HOME/Go
+if [ -d "$HOME/local/go" ]; then
+    export GOROOT="$HOME/local/go"
+    export GOPATH="$HOME/Go"
+    export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+    mkdir -p "$GOPATH"
 fi
-export PATH="$PATH:$GOPATH/bin"
+
+# Rust
+if [ -d "$HOME/local/src/rust" ]; then
+    export RUST_SRC_PATH="$HOME/local/src/rust"
+fi
 
 # Improve output, especially on Mac.
 export CLICOLOR=1
