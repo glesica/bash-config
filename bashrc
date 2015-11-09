@@ -185,6 +185,11 @@ if [ -d "$HOME/local/src/rust" ]; then
     export RUST_SRC_PATH="$HOME/local/src/rust"
 fi
 
+# Nim
+if [ -d "$HOME/local/nim" ]; then
+    export PATH="$PATH:$HOME/local/nim/bin:$HOME/.nimble/bin"
+fi
+
 # Improve output, especially on Mac.
 export CLICOLOR=1
 ### Added by the Heroku Toolbelt
