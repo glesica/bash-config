@@ -79,7 +79,7 @@ GIT_REPO='$(__git_ps1 " (%s)")'
 
 # Setup virtualenvwrapper for Python virtual environments.
 export WORKON_HOME=~/.envs
-mkdir -p $WORKON_HOME
+mkdir -p "$WORKON_HOME"
 if [ "$ARCH" = "Darwin" ]; then
     source /usr/local/bin/virtualenvwrapper.sh 2> /dev/null || true
 fi
@@ -154,6 +154,10 @@ alias cbssh="cb ~/.ssh/id_rsa.pub"
 alias cbwd="pwd | cb"  
 # Copy most recent command in bash history
 alias cbhs="cat $HISTFILE | tail -n 1 | cb"
+
+# Create home local and bin
+mkdir -p "$HOME/local"
+mkdir -p "$HOME/bin"
 
 # Add local bins to path.
 export PATH="$HOME/bin:$HOME/local/bin:$PATH"
