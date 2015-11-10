@@ -7,6 +7,11 @@
 
 ARCH=$(uname)
 
+# Load private config if found.
+if [ -f "$HOME/.bash_private" ]; then
+    . "$HOME/.bash_private"
+fi
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 

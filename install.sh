@@ -18,6 +18,12 @@ echo 'Linking .bash_profile'
 mv ~/.bash_profile ~/.bash_profile.bak
 ln -s $DIR/bash_profile ~/.bash_profile
 
+echo 'Linking .bash_private'
+if [ -f $DIR/bash_private ]; then
+    mv ~/.bash_private ~/.bash_private.bak
+    ln -s $DIR/bash_private ~/.bash_private
+fi
+
 echo 'Installing git helpers'
 mv ~/.git-prompt.sh ~/.git-prompt.sh.bak
 wget -O ~/.git-prompt.sh https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
