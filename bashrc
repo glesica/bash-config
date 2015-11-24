@@ -183,6 +183,10 @@ if [ -d "$HOME/local/nim" ]; then
     export PATH="$PATH:$HOME/local/nim/bin:$HOME/.nimble/bin"
 fi
 
+# Dart
+export DART_FLAGS='--checked'
+export PATH="$PATH:$HOME/.pub-cache/bin"
+
 # Improve output, especially on Mac.
 export CLICOLOR=1
 ### Added by the Heroku Toolbelt

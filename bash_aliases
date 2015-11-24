@@ -60,6 +60,7 @@ alias mvbooks='for filename in $(ls ~/Downloads/*.epub); do mv "$filename" ~/Boo
 # Improve ls output
 alias ls='ls -GFh'
 
-# Dartlang
+# Dart
 
+alias dartium='DART_FLAGS="--checked" /usr/local/bin/dartium'
 alias ddev='pub run dart_dev'
