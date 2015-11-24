@@ -59,3 +59,7 @@ alias mvbooks='for filename in $(ls ~/Downloads/*.epub); do mv "$filename" ~/Boo
 
 # Improve ls output
 alias ls='ls -GFh'
+
+# Dartlang
+
+alias ddev='pub run dart_dev'
