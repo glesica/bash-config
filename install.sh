@@ -18,6 +18,10 @@ echo 'Linking .bash_profile'
 mv ~/.bash_profile ~/.bash_profile.bak
 ln -s $DIR/bash_profile ~/.bash_profile
 
+echo 'Linking .bash_completion'
+mv "$HOME/.bash_completion" "$HOME/.bash_completion.bak"
+ln -s "$DIR/bash_completion" "$HOME/.bash_completion"
+
 echo 'Linking .bash_private'
 if [ -f $DIR/bash_private ]; then
     mv ~/.bash_private ~/.bash_private.bak
