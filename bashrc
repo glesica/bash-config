@@ -188,17 +188,14 @@ export CLICOLOR=1
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# Enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-    if [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
-    fi
-    # Enable Homebrew completions (Mac)
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
+# Enable standard Bash completions.
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+# Enable Homebrew completions (Mac).
+unalias brew
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
 fi
 
 # Load private config if found.
