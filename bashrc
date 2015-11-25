@@ -197,9 +197,12 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 # Enable Homebrew completions (Mac).
-unalias brew
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
+if [[ -f $(which brew) ]]; then
+    # I often alias brew in a way that requires sudo.
+    unalias brew 2>/dev/null
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
 fi
 
 # Load private config if found.
