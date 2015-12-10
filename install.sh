@@ -28,6 +28,12 @@ if [ -f $DIR/bash_private ]; then
     ln -s $DIR/bash_private ~/.bash_private
 fi
 
+echo 'Linking .xsessionrc'
+if [ -f $DIR/xsessionrc ]; then
+    mv ~/.xsessionrc ~/.xsessionrc.bak
+    ln -s $DIR/xsessionrc ~/.xsessionrc
+fi
+
 echo 'Installing git helpers'
 mv ~/.git-prompt.sh ~/.git-prompt.sh.bak
 wget -O ~/.git-prompt.sh https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
