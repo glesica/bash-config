@@ -190,7 +190,7 @@ fi
 
 # Dart
 export DART_FLAGS='--checked'
-export PATH="$PATH:$HOME/.pub-cache/bin"
+export PATH="$PATH:/usr/lib/dart/bin:$HOME/.pub-cache/bin"
 
 # Improve output, especially on Mac.
 export CLICOLOR=1
