@@ -183,6 +183,11 @@ if [ -d "$HOME/local/nim" ]; then
     export PATH="$PATH:$HOME/local/nim/bin:$HOME/.nimble/bin"
 fi
 
+# Julia
+if [ -d "$HOME/local/julia" ]; then
+    export PATH="$PATH:$HOME/local/julia/bin"
+fi
+
 # Dart
 export DART_FLAGS='--checked'
 export PATH="$PATH:$HOME/.pub-cache/bin"

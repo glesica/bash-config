@@ -28,6 +28,10 @@ if [ -f $DIR/bash_private ]; then
     ln -s $DIR/bash_private ~/.bash_private
 fi
 
+echo 'Linking .xsessionrc'
+mv ~/.xsessionrc ~/.xsessionrc.bak
+ln -s $DIR/xsessionrc ~/.xsessionrc
+
 echo 'Linking .tmux.conf'
 mv ~/.tmux.conf ~/.tmux.conf.bak
 ln -s $DIR/tmux.conf ~/.tmux.conf
