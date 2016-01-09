@@ -165,6 +165,11 @@ fi
 # Set the editor
 export EDITOR=vim
 
+# Haskell / Stack
+if [[ -f $(which stack) ]]; then
+    eval "$(stack --bash-completion-script stack)"
+fi
+
 # Golang
 if [ -d "$HOME/local/go" ]; then
     export GOROOT="$HOME/local/go"
