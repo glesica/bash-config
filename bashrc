@@ -43,7 +43,9 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # Set up keyboard for use by a non-degenerate.
-keyboard
+if [[ "$DISPLAY" != "" ]]; then
+    keyboard
+fi
 
 # Colors (lazy shortcut).
 BLACK='\[\e[0;30m\]'
