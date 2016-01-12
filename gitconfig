@@ -1,0 +1,7 @@
+[user]
+	name = George Lesica
+	email = george@lesica.com
+[push]
+	default = simple
+[github]
+	user = glesica

@@ -10,35 +10,43 @@ backupfile() {
     mv "$1" "$1.bak" 2> /dev/null
 }
 
+linkfile() {
+    ln -s "$DIR/$1" "$HOME/.$1"
+}
+
 echo 'Linking .bashrc'
 backupfile "$HOME/.bashrc"
-ln -s $DIR/bashrc ~/.bashrc
+linkfile bashrc
 
 echo 'Linking .bash_aliases'
 backupfile "$HOME/.bash_aliases"
-ln -s $DIR/bash_aliases ~/.bash_aliases
+linkfile bash_aliases
 
 echo 'Linking .bash_profile'
 backupfile "$HOME/.bash_profile"
-ln -s $DIR/bash_profile ~/.bash_profile
+linkfile bash_profile
 
 echo 'Linking .bash_completion'
 backupfile "$HOME/.bash_completion"
-ln -s "$DIR/bash_completion" "$HOME/.bash_completion"
+linkfile bash_completion
 
 echo 'Linking .bash_private'
 if [ -f $DIR/bash_private ]; then
     backupfile "$HOME/.bash_private"
-    ln -s $DIR/bash_private ~/.bash_private
+    linkfile bash_private
 fi
 
 echo 'Linking .xsessionrc'
 backupfile "$HOME/.xsessionrc"
-ln -s $DIR/xsessionrc ~/.xsessionrc
+linkfile xsessionrc
 
 echo 'Linking .tmux.conf'
 backupfile "$HOME/.tmux.conf"
-ln -s $DIR/tmux.conf ~/.tmux.conf
+linkfile tmux.conf
+
+echo 'Linking .gitconfig'
+backupfile "$HOME/.gitconfig"
+linkfile gitconfig
 
 echo 'Installing git helpers'
 
