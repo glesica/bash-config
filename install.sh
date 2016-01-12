@@ -54,7 +54,7 @@ backupfile "$HOME/git-prompt.sh"
 if hash wget 2> /dev/null; then
     wget -O "$HOME/.git-prompt.sh" https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
 elif hash curl 2> /dev/null; then
-    curl -o "$HOME/.git-prompt.sh" https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
+    curl -L -o "$HOME/.git-prompt.sh" https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
 else
     touch "$HOME/.git-prompt.sh"
 fi
@@ -64,7 +64,7 @@ backupfile "$HOME/git-completion.sh"
 if hash wget 2> /dev/null; then
     wget -O "$HOME/.git-completion.sh" https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
 elif hash curl 2> /dev/null; then
-    curl -o "$HOME/.git-completion.sh" https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+    curl -L -o "$HOME/.git-completion.sh" https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
 else
     touch "$HOME/.git-completion.sh"
 fi
