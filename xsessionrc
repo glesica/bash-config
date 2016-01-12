@@ -5,4 +5,6 @@
 # Add some stuff to the path where dmenu can find it.
 export PATH=$HOME/bin:$HOME/local/bin:$PATH
 
-setxkbmap -option "ctrl:nocaps"
+if [[ "$DISPLAY" != "" ]]; then
+    setxkbmap -option "ctrl:nocaps"
+fi
