@@ -166,7 +166,7 @@ fi
 export EDITOR=vim
 
 # Haskell / Stack
-if [[ -f $(which stack) ]]; then
+if hash stack 2> /dev/null; then
     eval "$(stack --bash-completion-script stack)"
 fi
 
@@ -207,7 +207,7 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 # Enable Homebrew completions (Mac).
-if [[ -f $(which brew) ]]; then
+if hash brew 2> /dev/null; then
     # I often alias brew in a way that requires sudo.
     unalias brew 2>/dev/null
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
