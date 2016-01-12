@@ -5,6 +5,9 @@
 
 ARCH=$(uname)
 
+# Reload bashrc
+alias reload="source ~/.bashrc"
+
 # Long directory listings
 alias lsl="ls -l"
 alias lsla="ls -la"
