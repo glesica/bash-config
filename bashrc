@@ -38,14 +38,10 @@ case "$TERM" in
 esac
 
 # Read in alias definitions.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
 
 # Set up keyboard for use by a non-degenerate.
-if [[ "$DISPLAY" != "" ]]; then
-    keyboard
-fi
+[ "$DISPLAY" != "" ] && keyboard
 
 # Colors (lazy shortcut).
 BLACK='\[\e[0;30m\]'
@@ -75,9 +71,7 @@ GIT_REPO='$(__git_ps1 " (%s)")'
 # Setup virtualenvwrapper for Python virtual environments.
 export WORKON_HOME=~/.envs
 mkdir -p "$WORKON_HOME"
-if [ "$ARCH" = "Darwin" ]; then
-    source /usr/local/bin/virtualenvwrapper.sh 2> /dev/null || true
-fi
+[ "$ARCH" == "Darwin" ] && source /usr/local/bin/virtualenvwrapper.sh 2> /dev/null || true
 
 # Set up a nice prompt.
 PS_SUCCESS=$GREEN
