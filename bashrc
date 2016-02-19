@@ -62,11 +62,12 @@ LIGHTCYAN='\[\e[1;36m\]'
 WHITE='\[\e[1;37m\]'
 NOCOLOR='\[\e[1;00m\]'
 
-# Git completion.
+# Git setup.
 source ~/.git-completion.sh
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_REPO='$(__git_ps1 " (%s)")'
+git config --global core.excludesfile '~/.gitignore'
 
 # Setup virtualenvwrapper for Python virtual environments.
 export WORKON_HOME=~/.envs
