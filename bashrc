@@ -194,6 +194,12 @@ fi
 export DART_FLAGS='--checked'
 export PATH="$PATH:/usr/lib/dart/bin:$HOME/.pub-cache/bin"
 
+# OCaml
+
+if [ -d "$HOME/.opam/opam-init" ]; then
+    source "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
+fi
+
 # Improve output, especially on Mac.
 export CLICOLOR=1
 ### Added by the Heroku Toolbelt
