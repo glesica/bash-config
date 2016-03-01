@@ -5,3 +5,5 @@
 	default = simple
 [github]
 	user = glesica
+[core]
+	excludesfile = ~/.gitignore
