@@ -146,11 +146,12 @@ alias cbwd="pwd | cb"
 alias cbhs="cat $HISTFILE | tail -n 1 | cb"
 
 # Create home local and bin
-mkdir -p "$HOME/local"
 mkdir -p "$HOME/bin"
+mkdir -p "$HOME/local"
+mkdir -p "$HOME/.local/bin"
 
 # Add local bins to path.
-export PATH="$HOME/bin:$HOME/local/bin:$PATH"
+export PATH="$HOME/bin:$HOME/local/bin:$HOME/.local/bin:$PATH"
 
 # Add Mac specific binaries to path.
 if [ "$ARCH" = "Darwin" ]; then
