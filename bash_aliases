@@ -22,14 +22,15 @@ alias cls="clear"
 alias clls="clear; ls -l"
 
 # Open files more easily
+# TODO: Make this generic across various DEs and Mac
 alias op="exo-open"
 
-# enable color support of ls and also add handy aliases
+# Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias ls='ls -Gh --color=auto'
+    alias dir='dir -Gh --color=auto'
+    alias vdir='vdir -Gh --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -60,10 +61,6 @@ alias glf='git log --oneline --graph --decorate --all'
 # File helpers
 alias mvbooks='for filename in $(ls ~/Downloads/*.epub); do mv "$filename" ~/Books/; mv "${filename%.*}.pdf" ~/Books/; done'
 
-# Improve ls output
-alias ls='ls -GFh'
-
 # Dart
-
 alias dartium='DART_FLAGS="--checked" /usr/local/bin/dartium'
 alias ddev='pub run dart_dev'
