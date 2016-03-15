@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+# Switches between various Julia versions. By default, looks for versions in
+# $HOME/local/julia/, but this can be configured by setting the JVM_BIN_PREFIX
+# variable. Also links the corresponding packages directory to $HOME/julia-pkgs
+# for convenience.
+
+JVM_PKG_PREFIX=${JVM_PKG_PREFIX:-"$HOME/.julia"}
+JVM_BIN_PREFIX=${JVM_BIN_PREFIX:-"$HOME/local/julia"}
+
+JBIN=""
+PDIR=""
+
+function usage() {
+    echo "JVM - Julia Version Manager"
+    echo ""
+    echo "Usage: jvm <version>"
+    echo "  version - a version string like 'v0.4' or '0.4.3'"
+}
+
+if [[ ! "$1" ]]; then
+    echo "No version provided."
+    echo ""
+    usage
+    exit 1
+fi
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    usage
+    exit 0
+fi
+
+# Look for the executable
+if [[ -d "$JVM_BIN_PREFIX/$1" ]]; then
+    JBIN="$JVM_BIN_PREFIX/$1/bin/julia"
+elif [[ -d "$JVM_BIN_PREFIX/v$1" ]]; then
+    JBIN="$JVM_BIN_PREFIX/v$1/bin/julia"
+else
+    echo "No executable for version $1 found."
+    echo ""
+    usage
+    exit 1
+fi
+
+# Ensure the package directory has been created
+."$JBIN" -e 'Pkg.init()'
+
+# Look for the package directory
+if [[ -d "$JVM_PKG_PREFIX/$1" ]]; then
+    PDIR="$JVM_PKG_PREFIX/$1"
+elif [[ -d "$JVM_PKG_PREFIX/v$1" ]]; then
+    PDIR="$JVM_PKG_PREFIX/v$1"
+else
+    echo "No packages for version $1 found."
+    echo ""
+    usage
+    exit 1
+fi
+
+echo "Linking executable for version $1..."
+
+rm "$HOME/bin/julia"
+ln -s "$JBIN" "$HOME/bin/julia"
+
+echo "Linking packages for version $1..."
+
+rm -r "$HOME/julia-pkgs"
+ln -s $PDIR "$HOME/julia-pkgs"
+

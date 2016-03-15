@@ -31,7 +31,7 @@ backupfile "$HOME/.bash_completion"
 linkfile bash_completion
 
 echo 'Linking .bash_private'
-if [ -f $DIR/bash_private ]; then
+if [ -f "$DIR/bash_private" ]; then
     backupfile "$HOME/.bash_private"
     linkfile bash_private
 fi
@@ -69,3 +69,13 @@ else
     touch "$HOME/.git-completion.sh"
 fi
 chmod +x "$HOME/.git-completion.sh"
+
+echo 'Linking ~/bin/ entries'
+mkdir -p "$HOME/bin"
+for exe in `ls "$DIR/bin/"`; do
+    if [ -f "$HOME/bin/$exe" ]; then
+        backupfile "$HOME/bin/$exe"
+    fi
+    ln -s "$DIR/bin/$exe" "$HOME/bin/$exe"
+done
+
