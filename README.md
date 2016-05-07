@@ -16,6 +16,7 @@ The files can be installed using the included script:
   * `.xsessionrc`
   * `.tmux.conf`
   * `.gitconfig`
+  * `.gitignore` (global)
   * `.git-prompt.sh`
   * `.git-completion.sh`
   * `.bin/*`

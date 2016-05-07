@@ -48,6 +48,10 @@ echo 'Linking .gitconfig'
 backupfile "$HOME/.gitconfig"
 linkfile gitconfig
 
+echo 'Linking .gitignore'
+backupfile "$HOME/.gitignore"
+linkfile gitignore
+
 echo 'Installing git helpers'
 
 backupfile "$HOME/git-prompt.sh"
