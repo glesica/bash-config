@@ -190,6 +190,10 @@ fi
 export DART_FLAGS='--checked'
 export PATH="$PATH:/usr/lib/dart/bin:$HOME/.pub-cache/bin"
 
+if hash dart_dev 2> /dev/null; then
+    eval "$(dart_dev bash-completion)"
+fi
+
 # OCaml
 
 if [ -d "$HOME/.opam/opam-init" ]; then
@@ -219,3 +223,5 @@ if [ -f "$HOME/.bash_private" ]; then
     . "$HOME/.bash_private"
 fi
 
+# Add Chromium's depot_tools to the PATH
+export PATH="$PATH:/Users/georgelesica/local/depot_tools"
