@@ -200,6 +200,12 @@ if [ -d "$HOME/.opam/opam-init" ]; then
     source "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
 fi
 
+# Node
+
+if [ -d "$HOME/local/node" ]; then
+    export PATH="$PATH:$HOME/local/node/bin"
+fi
+
 # Improve output, especially on Mac.
 export CLICOLOR=1
 ### Added by the Heroku Toolbelt
