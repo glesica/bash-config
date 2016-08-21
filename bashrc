@@ -206,6 +206,12 @@ if [ -d "$HOME/local/node" ]; then
     export PATH="$PATH:$HOME/local/node/bin"
 fi
 
+# Arduino
+
+if [ -d "$HOME/local/arduino" ]; then
+    export PATH="$PATH:$HOME/local/arduino"
+fi
+
 # Improve output, especially on Mac.
 export CLICOLOR=1
 ### Added by the Heroku Toolbelt
