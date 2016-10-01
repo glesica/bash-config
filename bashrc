@@ -203,13 +203,19 @@ fi
 # Node
 
 if [ -d "$HOME/local/node" ]; then
-    PATH="$PATH:$HOME/local/node/bin"
+    export PATH="$PATH:$HOME/local/node/bin"
 fi
 
 # Firefox
 
 if [ -d "$HOME/local/firefox" ]; then
-    PATH="$PATH:$HOME/local/firefox"
+    export PATH="$PATH:$HOME/local/firefox"
+fi
+
+# Arduino
+
+if [ -d "$HOME/local/arduino" ]; then
+    export PATH="$PATH:$HOME/local/arduino"
 fi
 
 # Improve output, especially on Mac.
