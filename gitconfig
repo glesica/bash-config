@@ -1,6 +1,7 @@
 [user]
 	name = George Lesica
 	email = george@lesica.com
+	signingkey = FEBFA545
 [push]
 	default = simple
 [github]
