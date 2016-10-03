@@ -218,6 +218,12 @@ if [ -d "$HOME/local/arduino" ]; then
     export PATH="$PATH:$HOME/local/arduino"
 fi
 
+# Intellij
+
+if [ -d "$HOME/local/idea" ]; then
+    export PATH="$PATH:$HOME/local/idea/bin"
+fi
+
 # Improve output, especially on Mac.
 export CLICOLOR=1
 ### Added by the Heroku Toolbelt
