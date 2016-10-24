@@ -177,8 +177,10 @@ if [ -d "$HOME/local/go" ]; then
 fi
 
 # Rust
+export PATH="$PATH:$HOME/.cargo/bin"
+
 if [ -d "$HOME/local/src/rust" ]; then
-    export RUST_SRC_PATH="$HOME/local/src/rust"
+    export RUST_SRC_PATH="$HOME/local/src/rust/src"
 fi
 
 # Nim
