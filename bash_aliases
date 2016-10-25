@@ -57,10 +57,13 @@ esac
 alias gco='git checkout'
 alias gst='git status'
 alias glf='git log --oneline --graph --decorate --all'
+alias master='git checkout master && git pull'
 
 # File helpers
 alias mvbooks='for filename in $(ls ~/Downloads/*.epub); do mv "$filename" ~/Books/; mv "${filename%.*}.pdf" ~/Books/; done'
 
 # Dart
-alias dartium='DART_FLAGS="--checked" /usr/local/bin/dartium'
 alias ddev='pub run dart_dev'
+
+# System
+alias aguagu='sudo apt-get update && sudo apt-get upgrade'
