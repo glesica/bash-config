@@ -147,17 +147,33 @@ alias cbhs="cat $HISTFILE | tail -n 1 | cb"
 
 # Create home local and bin
 mkdir -p "$HOME/bin"
-mkdir -p "$HOME/local"
+mkdir -p "$HOME/local/bin"
 mkdir -p "$HOME/.local/bin"
 
+function append_to_path() {
+    local newpath="$1"
+    if [[ ! "$PATH" == *"$newpath"* ]]; then
+        export PATH="$PATH:$newpath"
+    fi
+}
+
+function prepend_to_path() {
+    local newpath="$1"
+    if [[ ! "$PATH" == *"$newpath"* ]]; then
+        export PATH="$newpath:$PATH"
+    fi
+}
+
 # Add local bins to path.
-export PATH="$HOME/bin:$HOME/local/bin:$HOME/.local/bin:$PATH"
+prepend_to_path "$HOME/.local/bin"
+prepend_to_path "$HOME/local/bin"
+prepend_to_path "$HOME/bin"
 
 # Add Mac specific binaries to path.
 if [ "$ARCH" = "Darwin" ]; then
-    export PATH="/usr/local/bin:$PATH" # Homebrew
-    export PATH="$PATH:$HOME/Workspace/gradle/bin"
-    export PATH="$PATH:$HOME/Library/Haskell/bin"
+    prepend_to_path "/usr/local/bin" # Homebrew
+    append_to_path "$HOME/Workspace/gradle/bin"
+    append_to_path "$HOME/Library/Haskell/bin"
 fi
 
 # Set the editor
@@ -172,12 +188,13 @@ fi
 if [ -d "$HOME/local/go" ]; then
     export GOROOT="$HOME/local/go"
     export GOPATH="$HOME/Go"
-    export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+    append_to_path "$GOROOT/bin"
+    append_to_path "$GOPATH/bin"
     mkdir -p "$GOPATH"
 fi
 
 # Rust
-export PATH="$PATH:$HOME/.cargo/bin"
+append_to_path "$HOME/.cargo/bin"
 
 if [ -d "$HOME/local/src/rust" ]; then
     export RUST_SRC_PATH="$HOME/local/src/rust/src"
@@ -185,12 +202,14 @@ fi
 
 # Nim
 if [ -d "$HOME/local/nim" ]; then
-    export PATH="$PATH:$HOME/local/nim/bin:$HOME/.nimble/bin"
+    append_to_path "$HOME/local/nim/bin"
+    append_to_path "$HOME/.nimble/bin"
 fi
 
 # Dart
 export DART_FLAGS='--checked'
-export PATH="$PATH:/usr/lib/dart/bin:$HOME/.pub-cache/bin"
+append_to_path "/usr/lib/dart/bin"
+append_to_path "$HOME/.pub-cache/bin"
 
 if hash dart_dev 2> /dev/null; then
     eval "$(dart_dev bash-completion)"
@@ -205,36 +224,39 @@ fi
 # Node
 
 if [ -d "$HOME/local/node" ]; then
-    export PATH="$PATH:$HOME/local/node/bin"
+    append_to_path "$HOME/local/node/bin"
 fi
 
 # Firefox
 
 if [ -d "$HOME/local/firefox" ]; then
-    export PATH="$PATH:$HOME/local/firefox"
+    append_to_path "$HOME/local/firefox"
 fi
 
 # Arduino
 
 if [ -d "$HOME/local/arduino" ]; then
-    export PATH="$PATH:$HOME/local/arduino"
+    append_to_path "$HOME/local/arduino"
 fi
 
 # Intellij
 
 if [ -d "$HOME/local/idea" ]; then
-    export PATH="$PATH:$HOME/local/idea/bin"
+    append_to_path "$HOME/local/idea/bin"
 fi
 
 # Improve output, especially on Mac.
 export CLICOLOR=1
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+
+if [ -d "/usr/local/heroku/bin" ]; then
+    prepend_to_path "/usr/local/heroku/bin"
+fi
 
 # Enable standard Bash completions.
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+
 # Enable Homebrew completions (Mac).
 if hash brew 2> /dev/null; then
     # I often alias brew in a way that requires sudo.
@@ -244,10 +266,13 @@ if hash brew 2> /dev/null; then
     fi
 fi
 
+# Add Chromium's depot_tools
+if [ -d "$HOME/local/depot_tools" ]; then
+    append_to_path "$HOME/local/depot_tools"
+fi
+
 # Load private config if found.
 if [ -f "$HOME/.bash_private" ]; then
     . "$HOME/.bash_private"
 fi
 
-# Add Chromium's depot_tools to the PATH
-export PATH="$PATH:/Users/georgelesica/local/depot_tools"
