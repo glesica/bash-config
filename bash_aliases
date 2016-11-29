@@ -53,6 +53,11 @@ case "$ARCH" in
     Darwin) alias keyboard='';;
 esac
 
+# Visual Studio Code Mac alias
+case "$ARCH" in
+    Darwin) alias vscode='open /Applications/Visual\ Studio\ Code.app';;
+esac
+
 # Some handy git aliases
 alias gco='git checkout'
 alias gst='git status'
