@@ -82,6 +82,15 @@ PS_GIT=$LIGHTPURPLE
 PS_DEFAULT=$CYAN
 PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)\342\226\210\342\226\210 ${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
 
+# GPG Agent or whatever
+
+export GPG_TTY=`tty`
+if [ -f "$HOME/.gnupg/.gpg-agent-info" ] && [ -n "$(pgrep gpg-agent)" ]; then
+    source ~/.gnupg/.gpg-agent-info
+else
+    eval $(gpg-agent --daemon --write-env-file "$HOME/.gnupg/.gpg-agent-info" || true)
+fi
+
 # A small function to aid in lowercasing file extensions, 
 # such as those produced by digital cameras (.JPG)
 # ------------------------------------------------
