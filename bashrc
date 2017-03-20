@@ -154,6 +154,14 @@ alias cbwd="pwd | cb"
 # Copy most recent command in bash history
 alias cbhs="cat $HISTFILE | tail -n 1 | cb"
 
+# mkdir + cd in one!
+# https://www.reddit.com/r/bash/comments/5obi56/mkcd/dci2i1b/
+mkcd() { 
+    mkdir "$@" || return
+    shift "$(( $# - 1 ))"
+    cd -- "$1"
+}
+
 # Create home local and bin
 mkdir -p "$HOME/bin"
 mkdir -p "$HOME/local/bin"
