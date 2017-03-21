@@ -210,6 +210,9 @@ if [ -d "$HOME/local/go" ]; then
     mkdir -p "$GOPATH"
 fi
 
+# Gogland (worst name ever)
+append_to_path "/home/george/local/gogland/bin"
+
 # Rust
 append_to_path "$HOME/.cargo/bin"
 
