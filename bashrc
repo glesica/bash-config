@@ -296,3 +296,8 @@ if [ -f "$HOME/.bash_private" ]; then
     . "$HOME/.bash_private"
 fi
 
+# Add texbin on Mac
+if [ "$ARCH" = "Darwin" ]; then
+    append_to_path "/Library/TeX/texbin"
+fi
+
