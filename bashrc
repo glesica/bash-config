@@ -88,7 +88,7 @@ export GPG_TTY=`tty`
 if [ -f "$HOME/.gnupg/.gpg-agent-info" ] && [ -n "$(pgrep gpg-agent)" ]; then
     source ~/.gnupg/.gpg-agent-info
 else
-    eval $(gpg-agent --daemon --write-env-file "$HOME/.gnupg/.gpg-agent-info" || true)
+    eval $(gpg-agent --daemon "$HOME/.gnupg/.gpg-agent-info" || true)
 fi
 
 # A small function to aid in lowercasing file extensions, 
