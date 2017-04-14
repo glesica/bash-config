@@ -60,8 +60,9 @@ esac
 
 # Some handy git aliases
 alias gco='git checkout'
-alias gst='git status'
 alias glf='git log --oneline --graph --decorate --all'
+alias gp='git pull'
+alias gst='git status'
 alias master='git checkout master && git pull'
 
 # File helpers
