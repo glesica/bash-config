@@ -85,10 +85,15 @@ PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILU
 # GPG Agent or whatever
 
 export GPG_TTY=`tty`
-if [ -f "$HOME/.gnupg/.gpg-agent-info" ] && [ -n "$(pgrep gpg-agent)" ]; then
-    source ~/.gnupg/.gpg-agent-info
-else
-    eval $(gpg-agent --daemon "$HOME/.gnupg/.gpg-agent-info" || true)
+
+INFO_FILE="$HOME/.gnupg/.gpg-agent-info"
+
+if [ -f "INFO_FILE" ]; then
+    if [ -n "$(pgrep gpg-agent)" ]; then
+        source "$INFO_FILE"
+    else
+        eval $(gpg-agent --daemon "$INFO_FILE" || true)
+    fi
 fi
 
 # A small function to aid in lowercasing file extensions, 
