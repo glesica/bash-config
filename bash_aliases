@@ -22,8 +22,17 @@ alias cls="clear"
 alias clls="clear; ls -l"
 
 # Open files more easily
-# TODO: Make this generic across various DEs and Mac
-alias op="exo-open"
+if hash exo-open 2> /dev/null; then
+    alias op="exo-open"
+fi
+
+if hash xdg-open 2> /dev/null; then
+    alias op="xdg-open"
+fi
+
+if [ "$ARCH" == "Darwin" ]; then
+    alias op="open"
+fi
 
 # Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
