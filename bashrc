@@ -259,6 +259,10 @@ fi
 
 # Node
 
+export NVM_DIR="$HOME/local/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 if [ -d "$HOME/local/node" ]; then
     append_to_path "$HOME/local/node/bin"
 fi
