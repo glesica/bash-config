@@ -194,12 +194,18 @@ prepend_to_path "$HOME/bin"
 # Add Mac specific binaries to path.
 if [ "$ARCH" = "Darwin" ]; then
     prepend_to_path "/usr/local/bin" # Homebrew
-    append_to_path "$HOME/Workspace/gradle/bin"
+    append_to_path "$HOME/gradle/bin"
     append_to_path "$HOME/Library/Haskell/bin"
 fi
 
 # Set the editor
 export EDITOR=vim
+
+# Gradle
+if [ -d "$HOME/local/gradle" ]; then
+    export GRADLE_HOME="$HOME/local/gradle"
+    append_to_path "$GRADLE_HOME/bin"
+fi
 
 # Haskell / Stack
 if hash stack 2> /dev/null; then
@@ -232,6 +238,7 @@ if [ -d "$HOME/local/nim" ]; then
 fi
 
 # Dart
+
 export DART_FLAGS='--checked'
 append_to_path "/usr/lib/dart/bin"
 append_to_path "$HOME/.pub-cache/bin"
@@ -239,6 +246,10 @@ append_to_path "$HOME/.pub-cache/bin"
 if hash dart_dev 2> /dev/null; then
     eval "$(dart_dev bash-completion)"
 fi
+
+# Flutter
+
+append_to_path "$HOME/local/flutter/bin"
 
 # OCaml
 
