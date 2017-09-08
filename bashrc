@@ -210,7 +210,7 @@ fi
 if [ -d "$HOME/local/go" ]; then
     export GOROOT="$HOME/local/go"
     export GOPATH="$HOME/Go"
-    append_to_path "$GOROOT/bin"
+    prepend_to_path "$GOROOT/bin"
     append_to_path "$GOPATH/bin"
     mkdir -p "$GOPATH"
 fi
