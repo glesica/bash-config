@@ -75,12 +75,13 @@ mkdir -p "$WORKON_HOME"
 [ "$ARCH" == "Darwin" ] && source /usr/local/bin/virtualenvwrapper.sh 2> /dev/null || true
 
 # Set up a nice prompt.
+PS_DATE=$DARKGRAY
 PS_SUCCESS=$GREEN
 PS_FAILURE=$RED
 PS_HOST=$YELLOW
 PS_GIT=$LIGHTPURPLE
 PS_DEFAULT=$CYAN
-PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)\342\226\210\342\226\210 ${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
+PS1="\n${PS_DATE}\$(date \"+%Y-%m-%d %T\")\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)\342\226\210\342\226\210 ${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
 
 # GPG Agent or whatever
 
