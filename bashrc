@@ -69,10 +69,18 @@ GIT_PS1_SHOWDIRTYSTATE=1
 GIT_REPO='$(__git_ps1 " (%s)")'
 git config --global core.excludesfile '~/.gitignore'
 
-# Setup virtualenvwrapper for Python virtual environments.
-export WORKON_HOME=~/.envs
+# Sets the working directory for all virtualenvs
+export WORKON_HOME=$HOME/.virtualenvs
 mkdir -p "$WORKON_HOME"
-[ "$ARCH" == "Darwin" ] && source /usr/local/bin/virtualenvwrapper.sh 2> /dev/null || true
+
+# Sources the virtualenvwrapper so all the commands are available in the shell
+if [ "$ARCH" == "Darwin" ]; then
+    # Setup virtualenvwrapper for Python virtual environments.
+    # Don't let Mac python (in /usr/bin) supercede brew's python (/usr/local/bin)
+    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # Set up a nice prompt.
 PS_DATE=$DARKGRAY
@@ -217,7 +225,7 @@ fi
 if [ -d "$HOME/local/go" ]; then
     export GOROOT="$HOME/local/go"
     export GOPATH="$HOME/Go"
-    append_to_path "$GOROOT/bin"
+    prepend_to_path "$GOROOT/bin"
     append_to_path "$GOPATH/bin"
     mkdir -p "$GOPATH"
 fi
