@@ -77,9 +77,12 @@ mkdir -p "$WORKON_HOME"
 if [ "$ARCH" == "Darwin" ]; then
     # Setup virtualenvwrapper for Python virtual environments.
     # Don't let Mac python (in /usr/bin) supercede brew's python (/usr/local/bin)
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-
-    source /usr/local/bin/virtualenvwrapper.sh
+    if [ -f "/usr/local/bin/python" ]; then
+        export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+        if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
+            source /usr/local/bin/virtualenvwrapper.sh
+        fi
+    fi
 fi
 
 # Set up a nice prompt.
@@ -89,7 +92,7 @@ PS_FAILURE=$RED
 PS_HOST=$YELLOW
 PS_GIT=$LIGHTPURPLE
 PS_DEFAULT=$CYAN
-PS1="\n${PS_DATE}\$(date \"+%Y-%m-%d %T\")\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)\342\226\210\342\226\210 ${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
+PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}\"; else echo \"${PS_FAILURE}\"; fi)[ \$(date \"+%Y-%m-%d %T\") ]\n${PS_DEFAULT}[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
 
 # GPG Agent or whatever
 
