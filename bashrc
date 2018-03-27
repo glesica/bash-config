@@ -10,6 +10,29 @@ ARCH=$(uname)
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# Utility functions
+
+function append_to_path() {
+    local newpath="$1"
+    if [[ ! "$PATH" == *"$newpath"* ]]; then
+        export PATH="$PATH:$newpath"
+    fi
+}
+
+function prepend_to_path() {
+    local newpath="$1"
+    if [[ ! "$PATH" == *"$newpath"* ]]; then
+        export PATH="$newpath:$PATH"
+    fi
+}
+
+function source_if_exists() {
+    local srcpath="$1"
+    if [[ -f "$srcpath" ]]; then
+        source "$srcpath"
+    fi
+}
+
 # Don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace.
 HISTCONTROL=ignoredups:ignorespace
@@ -38,7 +61,7 @@ case "$TERM" in
 esac
 
 # Read in alias definitions.
-[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+source_if_exists "$HOME/.bash_aliases"
 
 # Set up keyboard for use by a non-degenerate.
 [ "$DISPLAY" != "" ] && keyboard
@@ -63,8 +86,8 @@ WHITE='\[\e[1;37m\]'
 NOCOLOR='\[\e[1;00m\]'
 
 # Git setup.
-source ~/.git-completion.sh
-source ~/.git-prompt.sh
+source_if_exists ~/.git-completion.sh
+source_if_exists ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_REPO='$(__git_ps1 " (%s)")'
 git config --global core.excludesfile '~/.gitignore'
@@ -79,9 +102,7 @@ if [ "$ARCH" == "Darwin" ]; then
     # Don't let Mac python (in /usr/bin) supercede brew's python (/usr/local/bin)
     if [ -f "/usr/local/bin/python" ]; then
         export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-        if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
-            source /usr/local/bin/virtualenvwrapper.sh
-        fi
+        source_if_exists /usr/local/bin/virtualenvwrapper.sh
     fi
 fi
 
@@ -102,7 +123,7 @@ INFO_FILE="$HOME/.gnupg/.gpg-agent-info"
 
 if [ -f "INFO_FILE" ]; then
     if [ -n "$(pgrep gpg-agent)" ]; then
-        source "$INFO_FILE"
+        source_if_exists "$INFO_FILE"
     else
         eval $(gpg-agent --daemon "$INFO_FILE" || true)
     fi
@@ -184,20 +205,6 @@ mkdir -p "$HOME/bin"
 mkdir -p "$HOME/local/bin"
 mkdir -p "$HOME/.local/bin"
 
-function append_to_path() {
-    local newpath="$1"
-    if [[ ! "$PATH" == *"$newpath"* ]]; then
-        export PATH="$PATH:$newpath"
-    fi
-}
-
-function prepend_to_path() {
-    local newpath="$1"
-    if [[ ! "$PATH" == *"$newpath"* ]]; then
-        export PATH="$newpath:$PATH"
-    fi
-}
-
 # Add local bins to path.
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$HOME/local/bin"
@@ -225,12 +232,12 @@ if hash stack 2> /dev/null; then
 fi
 
 # Golang
-if [ -d "$HOME/local/go" ]; then
-    export GOROOT="$HOME/local/go"
-    export GOPATH="$HOME/Go"
-    prepend_to_path "$GOROOT/bin"
-    append_to_path "$GOPATH/bin"
-    mkdir -p "$GOPATH"
+if [[ -f "$HOME/.swgo.bash" ]]; then
+    source "$HOME/.swgo.bash"
+    if [[ -f "$HOME/.swgo" ]]; then
+	swgo
+	mkdir -p "$GOPATH"
+    fi
 fi
 
 # GoLand

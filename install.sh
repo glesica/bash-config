@@ -36,6 +36,10 @@ if [ -f "$DIR/bash_private" ]; then
     linkfile bash_private
 fi
 
+echo 'Linking .swgo.bash'
+backupfile "$HOME/.swgo.bash"
+linkfile swgo.bash
+
 echo 'Linking .xsessionrc'
 backupfile "$HOME/.xsessionrc"
 linkfile xsessionrc
