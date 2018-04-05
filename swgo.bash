@@ -17,6 +17,31 @@
 function swgo() {
 	local SWGO_CONFIG='.swgo'
 
+    # Save
+    # Copy the existing GOROOT and GOPATH into a .swgo file,
+    # if they exist. If not, create a .swgo file with empty
+    # assignments.
+    if [[ "$1" == "save" ]]; then
+        echo "GOROOT_=\"$GOROOT\"" > $SWGO_CONFIG
+        echo "GOPATH_=\"$GOPATH\"" >> $SWGO_CONFIG
+
+        return 0
+    fi
+
+    # Ignore
+    # Append the .swgo filename to existing .gitignore,
+    # .hgignore, and possibly other files in the home
+    # directory.
+    if [[ "$1" == "ignore" ]]; then
+        # TODO: Check for existence first
+        echo "$SWGO_CONFIG" >> "$HOME/.gitignore"
+        echo "$SWGO_CONFIG" >> "$HOME/.hgignore"
+
+        return 0
+    fi
+
+    # Default functionality
+
 	# Look for the local .swgo file or, failing that, one
 	# in the home directory. If neither is found, exit with
 	# an error.
