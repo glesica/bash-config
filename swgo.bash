@@ -17,6 +17,11 @@
 function swgo() {
 	local SWGO_CONFIG='.swgo'
 
+    local quiet="0"
+    if [[ "$1" == "-q" ]]; then
+        quiet="1"
+    fi
+
     # Save
     # Copy the existing GOROOT and GOPATH into a .swgo file,
     # if they exist. If not, create a .swgo file with empty
@@ -118,7 +123,11 @@ function swgo() {
 	# system Go from being used.
 	export PATH="$GOROOT/bin:$PATH:$GOPATH/bin"
 
-	echo "GOROOT=$GOROOT"
-	echo "GOPATH=$GOPATH"
+    if [[ "$quiet" == "0" ]]; then
+        echo "GOROOT=$GOROOT"
+        echo "GOPATH=$GOPATH"
+    fi
+
 	return 0
 }
+

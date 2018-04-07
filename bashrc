@@ -235,7 +235,7 @@ fi
 if [[ -f "$HOME/.swgo.bash" ]]; then
     source "$HOME/.swgo.bash"
     if [[ -f "$HOME/.swgo" ]]; then
-	swgo
+	swgo -q
 	mkdir -p "$GOPATH"
     fi
 fi
