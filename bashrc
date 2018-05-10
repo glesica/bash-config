@@ -241,7 +241,10 @@ if [[ -f "$HOME/.swgo.bash" ]]; then
 fi
 
 # GoLand
-append_to_path "/home/george/local/goland/bin"
+append_to_path "$HOME/local/goland/bin"
+
+# Google Cloud
+append_to_path "$HOME/local/google-cloud-sdk/bin"
 
 # Rust
 append_to_path "$HOME/.cargo/bin"
