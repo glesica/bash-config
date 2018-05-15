@@ -24,10 +24,11 @@ function swgo() {
         echo "Default:"
         echo "  Activate a config file, if found, use -q for quiet"
         echo "Commands:"
+        echo "  create - make a new project-specific GOPATH"
+        echo "  help - display this message"
+        echo "  ignore - add the config file to global ignore files"
         echo "  save - copy existing GOROOT and GOPATH"
         echo "  show - print the current GOROOT and GOPATH"
-        echo "  ignore - add the config file to global ignore files"
-        echo "  help - display this message"
     fi
 
     # Save
@@ -56,6 +57,28 @@ function swgo() {
         # TODO: Check for existence first
         echo "$SWGO_CONFIG" >> "$HOME/.gitignore"
         echo "$SWGO_CONFIG" >> "$HOME/.hgignore"
+
+        return 0
+    fi
+
+    # Create
+    # Set up a brand new Go project directory structure including src/, bin/,
+    # and /pkg directories. Parameters are the host (GitHub or whatever) and
+    # the project name.
+    if [[ "$1" == "create" ]]; then
+        local host="$2"
+        local proj="$3"
+        local code="$proj/src/$host/$proj"
+
+        mkdir -p "$proj/bin"
+        mkdir -p "$proj/pkg"
+        mkdir -p "$code"
+
+        echo "GOROOT_=\"$GOROOT\"" > "$code/$SWGO_CONFIG"
+        echo "GOPATH_=\"$PWD/$proj\"" >> "$code/$SWGO_CONFIG"
+
+        cd "$code"
+        swgo
 
         return 0
     fi
