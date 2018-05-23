@@ -333,6 +333,9 @@ if [ -d "$HOME/local/depot_tools" ]; then
     append_to_path "$HOME/local/depot_tools"
 fi
 
+# Current Julia version
+append_to_path "$HOME/local/julia"
+
 # Load private config if found.
 if [ -f "$HOME/.bash_private" ]; then
     . "$HOME/.bash_private"
