@@ -3,4 +3,5 @@ tags
 *.swp
 .vscode/
 .idea/
+.swgo
 
