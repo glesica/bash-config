@@ -24,10 +24,10 @@ function swgo() {
         echo "Default:"
         echo "  Activate a config file, if found, use -q for quiet"
         echo "Commands:"
-        echo "  create - make a new project-specific GOPATH"
+        echo "  create <host> <project> - make a new project-specific GOPATH"
         echo "  help - display this message"
         echo "  ignore - add the config file to global ignore files"
-        echo "  save - copy existing GOROOT and GOPATH"
+        echo "  save - copy existing GOROOT and GOPATH to a config"
         echo "  show - print the current GOROOT and GOPATH"
     fi
 
