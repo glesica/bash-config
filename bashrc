@@ -346,3 +346,6 @@ if [ "$ARCH" = "Darwin" ]; then
     append_to_path "/Library/TeX/texbin"
 fi
 
+# Add Powershell
+append_to_path "$HOME/local/powershell"
+
