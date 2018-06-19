@@ -118,7 +118,7 @@ PS_FAILURE=$RED
 PS_HOST=$YELLOW
 PS_GIT=$LIGHTPURPLE
 PS_DEFAULT=$CYAN
-PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}$CHECKMARK \"; else echo \"${PS_FAILURE}$BALLOTX \"; fi)${PS_DEFAULT}[ \$(date \"+%Y-%m-%d %T\") ]\n[ \u@${PS_HOST}\h${PS_DEFAULT} \w ]${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
+PS1="\n\$(if [[ \$? == 0 ]]; then echo \"${PS_SUCCESS}$CHECKMARK \"; else echo \"${PS_FAILURE}$BALLOTX \"; fi)${PS_DEFAULT}\$(date \"+%Y-%m-%d %T\")\n| \u@${PS_HOST}\h${PS_DEFAULT} \w${PS_GIT}${GIT_REPO} ${PS_DEFAULT}\n${NOCOLOR}$ "
 
 # GPG Agent or whatever
 
