@@ -98,7 +98,7 @@ GIT_REPO='$(__git_ps1 " (%s)")'
 git config --global core.excludesfile '~/.gitignore'
 
 # Sets the working directory for all virtualenvs
-export WORKON_HOME=$HOME/.virtualenvs
+export WORKON_HOME="$HOME/.virtualenvs"
 mkdir -p "$WORKON_HOME"
 
 # Sources the virtualenvwrapper so all the commands are available in the shell
@@ -341,11 +341,6 @@ fi
 # Current Julia version
 append_to_path "$HOME/local/julia"
 
-# Load private config if found.
-if [ -f "$HOME/.bash_private" ]; then
-    . "$HOME/.bash_private"
-fi
-
 # Add texbin on Mac
 if [ "$ARCH" = "Darwin" ]; then
     append_to_path "/Library/TeX/texbin"
@@ -356,4 +351,9 @@ append_to_path "$HOME/local/powershell"
 
 # Android SDK
 append_to_path "$HOME/Android/Sdk/emulator"
+
+# Load private config if found.
+if [ -f "$HOME/.bash_private" ]; then
+    . "$HOME/.bash_private"
+fi
 
