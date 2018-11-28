@@ -11,7 +11,9 @@ ARCH=$(uname)
 [ -z "$PS1" ] && return
 
 # Utility functions
+# -----------------
 
+# Append a directory to the PATH if it exists.
 function append_to_path() {
     local newpath="$1"
     if [[ ! "$PATH" == *"$newpath"* ]]; then
@@ -19,6 +21,7 @@ function append_to_path() {
     fi
 }
 
+# Prepend a directory to the PATH if it exists.
 function prepend_to_path() {
     local newpath="$1"
     if [[ ! "$PATH" == *"$newpath"* ]]; then
@@ -26,12 +29,16 @@ function prepend_to_path() {
     fi
 }
 
+# Source a file, but only if it exists.
 function source_if_exists() {
     local srcpath="$1"
     if [[ -f "$srcpath" ]]; then
         source "$srcpath"
     fi
 }
+
+# Terminal ergonomics
+# -------------------
 
 # Don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace.
@@ -53,6 +60,7 @@ shopt -s checkwinsize
 
 # Use 256 color terminal.
 export TERM=xterm-256color
+export CLICOLOR=1
 
 # Set a fancy prompt (non-color, unless we know we "want" color).
 case "$TERM" in
@@ -67,6 +75,7 @@ source_if_exists "$HOME/.bash_aliases"
 [ "$DISPLAY" != "" ] && keyboard
 
 # Colors (lazy shortcut).
+
 BLACK='\[\e[0;30m\]'
 RED='\[\e[0;31m\]'
 GREEN='\[\e[0;32m\]'
@@ -90,28 +99,9 @@ NOCOLOR='\[\e[1;00m\]'
 export BALLOTX='✘'
 export CHECKMARK='✔'
 
-# Git setup.
-source_if_exists ~/.git-completion.sh
-source_if_exists ~/.git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE=1
+# Prompt
+
 GIT_REPO='$(__git_ps1 " (%s)")'
-git config --global core.excludesfile '~/.gitignore'
-
-# Sets the working directory for all virtualenvs
-export WORKON_HOME="$HOME/.virtualenvs"
-mkdir -p "$WORKON_HOME"
-
-# Sources the virtualenvwrapper so all the commands are available in the shell
-if [ "$ARCH" == "Darwin" ]; then
-    # Setup virtualenvwrapper for Python virtual environments.
-    # Don't let Mac python (in /usr/bin) supercede brew's python (/usr/local/bin)
-    if [ -f "/usr/local/bin/python" ]; then
-        export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-        source_if_exists /usr/local/bin/virtualenvwrapper.sh
-    fi
-fi
-
-# Set up a nice prompt.
 PS_DATE=$DARKGRAY
 PS_SUCCESS=$GREEN
 PS_FAILURE=$RED
@@ -134,76 +124,7 @@ if [ -f "INFO_FILE" ]; then
     fi
 fi
 
-# A small function to aid in lowercasing file extensions, 
-# such as those produced by digital cameras (.JPG)
-# ------------------------------------------------
-extlower() {
-    for ofn in $@; do
-        ofe=`echo "${ofn}" | rev | cut -d'.' -f1 | rev`
-        nfe=`echo "${ofe}" | tr '[:upper:]' '[:lower:]'`
-        nfn=`echo "${ofn}" | sed s/${ofe}$/${nfe}/`
-        if [[ "${ofn}" != "${nfn}" ]]; then
-            echo "${ofn} --> ${nfn}"
-            mv -i ${ofn} ${nfn}
-        else
-            echo "${ofn} is already lower case"
-        fi
-    done
-}
-
-# A shortcut function that simplifies usage of xclip.
-# - Accepts input from either stdin (pipe), or params.
-# From: http://madebynathan.com/2011/10/04/a-nicer-way-to-use-xclip/
-# ------------------------------------------------
-cb() {
-  local _scs_col="\e[0;32m"; local _wrn_col='\e[1;31m'; local _trn_col='\e[0;33m'
-  # Check that xclip is installed.
-  if ! type xclip > /dev/null 2>&1; then
-    echo -e "$_wrn_col""You must have the 'xclip' program installed.\e[0m"
-  # Check user is not root (root doesn't have access to user xorg server)
-  elif [[ "$USER" == "root" ]]; then
-    echo -e "$_wrn_col""Must be regular user (not root) to copy a file to the clipboard.\e[0m"
-  else
-    # If no tty, data should be available on stdin
-    if ! [[ "$( tty )" == /dev/* ]]; then
-      input="$(< /dev/stdin)"
-    # Else, fetch input from params
-    else
-      input="$*"
-    fi
-    if [ -z "$input" ]; then  # If no input, print usage message.
-      echo "Copies a string to the clipboard."
-      echo "Usage: cb <string>"
-      echo "       echo <string> | cb"
-    else
-      # Copy input to clipboard
-      echo -n "$input" | xclip -selection c
-      # Truncate text for status
-      if [ ${#input} -gt 80 ]; then input="$(echo $input | cut -c1-80)$_trn_col...\e[0m"; fi
-      # Print status.
-      echo -e "$_scs_col""Copied to clipboard:\e[0m $input"
-    fi
-  fi
-}
-
-# Aliases / functions leveraging the cb() function
-# ------------------------------------------------
-# Copy contents of a file
-function cbf() { cat "$1" | cb; }  
-# Copy SSH public key
-alias cbssh="cb ~/.ssh/id_rsa.pub"  
-# Copy current working directory
-alias cbwd="pwd | cb"  
-# Copy most recent command in bash history
-alias cbhs="cat $HISTFILE | tail -n 1 | cb"
-
-# mkdir + cd in one!
-# https://www.reddit.com/r/bash/comments/5obi56/mkcd/dci2i1b/
-mkcd() { 
-    mkdir "$@" || return
-    shift "$(( $# - 1 ))"
-    cd -- "$1"
-}
+# Local directories
 
 # Create home local and bin
 mkdir -p "$HOME/bin"
@@ -223,20 +144,51 @@ if [ "$ARCH" = "Darwin" ]; then
 fi
 
 # Set the editor
-export EDITOR=vim
+
+if hash nvim 2> /dev/null; then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
+
+# Git
+
+source_if_exists ~/.git-completion.sh
+source_if_exists ~/.git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=1
+git config --global core.excludesfile '~/.gitignore'
+
+# Python
+
+# Sets the working directory for all virtualenvs
+export WORKON_HOME="$HOME/.virtualenvs"
+mkdir -p "$WORKON_HOME"
+
+# Sources the virtualenvwrapper so all the commands are available in the shell
+if [ "$ARCH" == "Darwin" ]; then
+    # Setup virtualenvwrapper for Python virtual environments.
+    # Don't let Mac python (in /usr/bin) supercede brew's python (/usr/local/bin)
+    if [ -f "/usr/local/bin/python" ]; then
+        export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+        source_if_exists /usr/local/bin/virtualenvwrapper.sh
+    fi
+fi
 
 # Gradle
+
 if [ -d "$HOME/local/gradle" ]; then
     export GRADLE_HOME="$HOME/local/gradle"
     append_to_path "$GRADLE_HOME/bin"
 fi
 
 # Haskell / Stack
+
 if hash stack 2> /dev/null; then
     eval "$(stack --bash-completion-script stack)"
 fi
 
 # Golang
+
 if [[ -f "$HOME/.swgo.bash" ]]; then
     source "$HOME/.swgo.bash"
     if [[ -f "$HOME/.swgo" ]]; then
@@ -245,13 +197,12 @@ if [[ -f "$HOME/.swgo.bash" ]]; then
     fi
 fi
 
-# GoLand
-append_to_path "$HOME/local/goland/bin"
-
 # Google Cloud
+
 append_to_path "$HOME/local/google-cloud-sdk/bin"
 
 # Rust
+
 append_to_path "$HOME/.cargo/bin"
 
 if [ -d "$HOME/local/src/rust" ]; then
@@ -259,6 +210,7 @@ if [ -d "$HOME/local/src/rust" ]; then
 fi
 
 # Nim
+
 if [ -d "$HOME/local/nim" ]; then
     append_to_path "$HOME/local/nim/bin"
     append_to_path "$HOME/.nimble/bin"
@@ -266,13 +218,8 @@ fi
 
 # Dart
 
-export DART_FLAGS='--checked'
 append_to_path "/usr/lib/dart/bin"
 append_to_path "$HOME/.pub-cache/bin"
-
-if hash dart_dev 2> /dev/null; then
-    eval "$(dart_dev bash-completion)"
-fi
 
 # Flutter
 
@@ -306,25 +253,14 @@ if [ -d "$HOME/local/arduino" ]; then
     append_to_path "$HOME/local/arduino"
 fi
 
-# Intellij
+# Standard Bash completions
 
-if [ -d "$HOME/local/idea" ]; then
-    append_to_path "$HOME/local/idea/bin"
-fi
-
-# Improve output, especially on Mac.
-export CLICOLOR=1
-
-if [ -d "/usr/local/heroku/bin" ]; then
-    prepend_to_path "/usr/local/heroku/bin"
-fi
-
-# Enable standard Bash completions.
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# Enable Homebrew completions (Mac).
+# Homebrew completions (Mac)
+
 if hash brew 2> /dev/null; then
     # I often alias brew in a way that requires sudo.
     unalias brew 2>/dev/null
@@ -333,27 +269,102 @@ if hash brew 2> /dev/null; then
     fi
 fi
 
-# Add Chromium's depot_tools
+# Chromium's depot_tools
+
 if [ -d "$HOME/local/depot_tools" ]; then
     append_to_path "$HOME/local/depot_tools"
 fi
 
-# Current Julia version
+# Julia
+
 append_to_path "$HOME/local/julia"
 
-# Add texbin on Mac
+# Texbin on Mac
+
 if [ "$ARCH" = "Darwin" ]; then
     append_to_path "/Library/TeX/texbin"
 fi
 
 # Powershell
+
 append_to_path "$HOME/local/powershell"
 
 # Android SDK
+
 append_to_path "$HOME/Android/Sdk/emulator"
 
-# Load private config if found.
+# Useful functions
+
+# A small function to aid in lowercasing file extensions, such as those
+# produced by digital cameras (.JPG)
+extlower() {
+    for ofn in $@; do
+        ofe=`echo "${ofn}" | rev | cut -d'.' -f1 | rev`
+        nfe=`echo "${ofe}" | tr '[:upper:]' '[:lower:]'`
+        nfn=`echo "${ofn}" | sed s/${ofe}$/${nfe}/`
+        if [[ "${ofn}" != "${nfn}" ]]; then
+            echo "${ofn} --> ${nfn}"
+            mv -i ${ofn} ${nfn}
+        else
+            echo "${ofn} is already lower case"
+        fi
+    done
+}
+
+# A shortcut function that simplifies usage of xclip.  Accepts input from
+# either stdin (pipe), or params.
+# From: http://madebynathan.com/2011/10/04/a-nicer-way-to-use-xclip/
+cb() {
+  local _scs_col="\e[0;32m"; local _wrn_col='\e[1;31m'; local _trn_col='\e[0;33m'
+  # Check that xclip is installed.
+  if ! type xclip > /dev/null 2>&1; then
+    echo -e "$_wrn_col""You must have the 'xclip' program installed.\e[0m"
+  # Check user is not root (root doesn't have access to user xorg server)
+  elif [[ "$USER" == "root" ]]; then
+    echo -e "$_wrn_col""Must be regular user (not root) to copy a file to the clipboard.\e[0m"
+  else
+    # If no tty, data should be available on stdin
+    if ! [[ "$( tty )" == /dev/* ]]; then
+      input="$(< /dev/stdin)"
+    # Else, fetch input from params
+    else
+      input="$*"
+    fi
+    if [ -z "$input" ]; then  # If no input, print usage message.
+      echo "Copies a string to the clipboard."
+      echo "Usage: cb <string>"
+      echo "       echo <string> | cb"
+    else
+      # Copy input to clipboard
+      echo -n "$input" | xclip -selection c
+      # Truncate text for status
+      if [ ${#input} -gt 80 ]; then input="$(echo $input | cut -c1-80)$_trn_col...\e[0m"; fi
+      # Print status.
+      echo -e "$_scs_col""Copied to clipboard:\e[0m $input"
+    fi
+  fi
+}
+
+# Aliases / functions leveraging the cb() function
+# Copy contents of a file
+function cbf() { cat "$1" | cb; }  
+# Copy SSH public key
+alias cbssh="cb ~/.ssh/id_rsa.pub"  
+# Copy current working directory
+alias cbwd="pwd | cb"  
+# Copy most recent command in bash history
+alias cbhs="cat $HISTFILE | tail -n 1 | cb"
+
+# mkdir + cd in one!
+# https://www.reddit.com/r/bash/comments/5obi56/mkcd/dci2i1b/
+mkcd() { 
+    mkdir "$@" || return
+    shift "$(( $# - 1 ))"
+    cd -- "$1"
+}
+
+# Private config
+
 if [ -f "$HOME/.bash_private" ]; then
     . "$HOME/.bash_private"
 fi
-
