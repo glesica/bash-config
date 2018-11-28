@@ -153,6 +153,13 @@ fi
 
 # Git
 
+gitauthors() {
+  # Lists the authors with the most commits over the duration specified.
+  # Defaults to 3 months (-v -3m) ago.
+  AFTER_DATE=${1:-$(date -v -3m +"%Y-%m-%d")}
+  git shortlog --summary --numbered --after=$AFTER_DATE
+}
+
 source_if_exists ~/.git-completion.sh
 source_if_exists ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
