@@ -8,6 +8,9 @@ ARCH=$(uname)
 # Reload bashrc
 alias reload="source ~/.bashrc"
 
+# Pat's magic diff alias
+alias gdd="git diff --no-index --word-diff=color"
+
 # Long directory listings
 alias lsl="ls -l"
 alias lsla="ls -la"
