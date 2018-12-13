@@ -218,10 +218,7 @@ fi
 
 # Nim
 
-if [ -d "$HOME/local/nim" ]; then
-    append_to_path "$HOME/local/nim/bin"
-    append_to_path "$HOME/.nimble/bin"
-fi
+append_to_path "$HOME/.nimble/bin"
 
 # Dart
 
