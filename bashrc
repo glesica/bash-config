@@ -202,6 +202,9 @@ if [[ -f "$HOME/.swgo.bash" ]]; then
 	swgo -q
 	mkdir -p "$GOPATH"
     fi
+else
+    export GOPATH="$HOME/Go"
+    append_to_path "$GOPATH/bin"
 fi
 
 # Google Cloud
