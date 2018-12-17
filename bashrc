@@ -199,8 +199,8 @@ fi
 if [[ -f "$HOME/.swgo.bash" ]]; then
     source "$HOME/.swgo.bash"
     if [[ -f "$HOME/.swgo" ]]; then
-	swgo -q
-	mkdir -p "$GOPATH"
+        swgo -q
+        mkdir -p "$GOPATH"
     fi
 else
     export GOPATH="$HOME/Go"
