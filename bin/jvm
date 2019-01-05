@@ -44,27 +44,29 @@ else
 fi
 
 # Ensure the package directory has been created
-"$JBIN" -e 'Pkg.init()'
+# We don't need this any more
+# echo "$JBIN"
+# "$JBIN" -e 'Pkg.init()'
 
 # Look for the package directory
-if [[ -d "$JVM_PKG_PREFIX/$PKGVER" ]]; then
-    PDIR="$JVM_PKG_PREFIX/$PKGVER"
-elif [[ -d "$JVM_PKG_PREFIX/v$PKGVER" ]]; then
-    PDIR="$JVM_PKG_PREFIX/v$PKGVER"
-else
-    echo "No packages for version $PKGVER found."
-    echo ""
-    usage
-    exit 1
-fi
+#if [[ -d "$JVM_PKG_PREFIX/$PKGVER" ]]; then
+#    PDIR="$JVM_PKG_PREFIX/$PKGVER"
+#elif [[ -d "$JVM_PKG_PREFIX/v$PKGVER" ]]; then
+#    PDIR="$JVM_PKG_PREFIX/v$PKGVER"
+#else
+#    echo "No packages for version $PKGVER found."
+#    echo ""
+#    usage
+#    exit 1
+#fi
 
 echo "Linking executable for version $1..."
 
 rm -f "$HOME/bin/julia"
 ln -s "$JBIN" "$HOME/bin/julia"
 
-echo "Linking packages for version $1..."
-
-rm -rf "$HOME/julia-pkgs"
-ln -s $PDIR "$HOME/julia-pkgs"
+#echo "Linking packages for version $1..."
+#
+#rm -rf "$HOME/julia-pkgs"
+#ln -s $PDIR "$HOME/julia-pkgs"
 
