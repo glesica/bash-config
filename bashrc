@@ -194,6 +194,8 @@ if hash stack 2> /dev/null; then
     eval "$(stack --bash-completion-script stack)"
 fi
 
+append_to_path "$HOME/.cabal/bin"
+
 # Golang
 
 if [[ -f "$HOME/.swgo.bash" ]]; then
