@@ -26,11 +26,11 @@ alias clls="clear; ls -l"
 
 # Open files more easily
 if hash exo-open 2> /dev/null; then
-    alias op="exo-open"
+    alias op="exo-open 2> /dev/null"
 fi
 
 if hash xdg-open 2> /dev/null; then
-    alias op="xdg-open"
+    alias op="xdg-open 2> /dev/null"
 fi
 
 if [ "$ARCH" == "Darwin" ]; then
