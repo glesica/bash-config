@@ -194,18 +194,13 @@ if hash stack 2> /dev/null; then
     eval "$(stack --bash-completion-script stack)"
 fi
 
+append_to_path "$HOME/.cabal/bin"
+
 # Golang
 
-if [[ -f "$HOME/.swgo.bash" ]]; then
-    source "$HOME/.swgo.bash"
-    if [[ -f "$HOME/.swgo" ]]; then
-	swgo -q
-	mkdir -p "$GOPATH"
-    fi
-else
-    export GOPATH="$HOME/Go"
-    append_to_path "$GOPATH/bin"
-fi
+export GOPATH="$HOME/Go"
+append_to_path "$GOPATH/bin"
+prepend_to_path "$HOME/local/go/bin"
 
 # Google Cloud
 

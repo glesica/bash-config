@@ -119,7 +119,7 @@ function swgo() {
 
     # If there was no GOPATH_ found in the config then we can't set a new
     # environment.
-	if [[ -z ${GOROOT_+x} ]]; then
+	if [[ -z ${GOPATH_+x} ]]; then
 		>&2 echo "No GOPATH_ defined in config"
 		return 1
 	fi
