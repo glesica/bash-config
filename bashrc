@@ -196,6 +196,12 @@ fi
 
 append_to_path "$HOME/.cabal/bin"
 
+# Nix package manager
+
+if [ -e /home/george/.nix-profile/etc/profile.d/nix.sh ]; then
+    . /home/george/.nix-profile/etc/profile.d/nix.sh
+fi
+
 # Golang
 
 export GOPATH="$HOME/Go"
