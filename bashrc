@@ -229,6 +229,8 @@ append_to_path "$HOME/.nimble/bin"
 append_to_path "/usr/lib/dart/bin"
 append_to_path "$HOME/.pub-cache/bin"
 
+source_if_exists "$HOME/.bash_dart"
+
 # Flutter
 
 append_to_path "$HOME/local/flutter/bin"
@@ -244,6 +246,8 @@ fi
 export NVM_DIR="$HOME/local/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+append_to_path "./node_modules/.bin"
 
 if [ -d "$HOME/local/node" ]; then
     append_to_path "$HOME/local/node/bin"
