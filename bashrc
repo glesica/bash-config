@@ -33,7 +33,7 @@ function prepend_to_path() {
 function source_if_exists() {
     local srcpath="$1"
     if [[ -f "$srcpath" ]]; then
-        source "$srcpath"
+        source "$srcpath" > /dev/null 2> /dev/null || true
     fi
 }
 
@@ -237,9 +237,7 @@ append_to_path "$HOME/local/flutter/bin"
 
 # OCaml
 
-if [ -d "$HOME/.opam/opam-init" ]; then
-    source "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
-fi
+source_if_exists "$HOME/.opam/opam-init/init.sh"
 
 # Node
 
@@ -304,6 +302,10 @@ append_to_path "$HOME/local/powershell"
 # Android SDK
 
 append_to_path "$HOME/Android/Sdk/emulator"
+
+# Nix package manager
+
+source_if_exists "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
 # Useful functions
 
