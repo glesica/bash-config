@@ -87,3 +87,12 @@ for exe in `ls "$DIR/bin/"`; do
     ln -s "$DIR/bin/$exe" "$HOME/bin/$exe"
 done
 
+echo 'Copying /etc/udev/rules.d/ entries'
+if [ -d "/etc/udev/rules.d" ]; then
+    for udev in `ls "$DIR/*.udev.rules"`; do
+        sudo cp "$DIR/$udev" "/etc/udev/rules.d/$udev"
+    done
+else
+    echo 'Not found: /etc/udev/rules.d/'
+fi
+
