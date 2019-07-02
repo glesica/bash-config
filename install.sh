@@ -89,6 +89,7 @@ done
 
 echo 'Copying /etc/udev/rules.d/ entries'
 if [ -d "/etc/udev/rules.d" ]; then
+    groupadd plugdev
     for udev in `ls "$DIR/*.udev.rules"`; do
         sudo cp "$DIR/$udev" "/etc/udev/rules.d/$udev"
     done
