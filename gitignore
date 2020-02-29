@@ -6,4 +6,5 @@ tags.temp
 .vscode/
 .idea/
 .swgo
+.DS_Store
 
