@@ -236,7 +236,7 @@ source_if_exists "$HOME/.bash_dart"
 
 append_to_path "$HOME/local/flutter/bin"
 
-# OCaml
+# OCaml / OPAM
 
 source_if_exists "$HOME/.opam/opam-init/init.sh"
 
@@ -307,6 +307,10 @@ append_to_path "$HOME/Android/Sdk/emulator"
 # Nix package manager
 
 source_if_exists "$HOME/.nix-profile/etc/profile.d/nix.sh"
+
+# Poetry (Python)
+
+export PATH="$HOME/.poetry/bin:$PATH"
 
 # Useful functions
 

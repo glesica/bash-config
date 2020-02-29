@@ -15,11 +15,3 @@ if [ -f "$HOME/.bashrc" ]; then
 . "$HOME/.bashrc"
 fi
 
-# OPAM configuration
-if [ "$ARCH" = "Darwin" ]; then
-    ./Users/george/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-fi
-
-export PATH="$HOME/.cargo/bin:$PATH"
-
-export PATH="$HOME/.poetry/bin:$PATH"
