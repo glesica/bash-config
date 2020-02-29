@@ -179,6 +179,7 @@ if [ "$ARCH" == "Darwin" ]; then
         export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
         source_if_exists /usr/local/bin/virtualenvwrapper.sh
     fi
+    append_to_path "/Users/george/Library/Python/3.7/bin"
 fi
 
 # Gradle
