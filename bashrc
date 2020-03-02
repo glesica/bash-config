@@ -197,6 +197,8 @@ fi
 
 append_to_path "$HOME/.cabal/bin"
 
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+
 # Nix package manager
 
 if [ -e /home/george/.nix-profile/etc/profile.d/nix.sh ]; then
@@ -387,3 +389,4 @@ mkcd() {
 if [ -f "$HOME/.bash_private" ]; then
     . "$HOME/.bash_private"
 fi
+
