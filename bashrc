@@ -315,6 +315,12 @@ source_if_exists "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
+# Racket
+
+if [ "$ARCH" = "Darwin" ]; then
+    append_to_path "/Applications/Racket v7.6/bin"
+fi
+
 # Useful functions
 
 # A small function to aid in lowercasing file extensions, such as those
