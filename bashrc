@@ -195,6 +195,7 @@ if hash stack 2> /dev/null; then
     eval "$(stack --bash-completion-script stack)"
 fi
 
+append_to_path "$HOME/.ghcup/bin"
 append_to_path "$HOME/.cabal/bin"
 
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
